@@ -1,0 +1,152 @@
+1) Release Parking Spot
+➤ URL: POST /api/spots/release
+➤ Action: Release parking spot by the owner
+🔸 Request Payload:
+{
+  "spotNumber": "A101",
+  "employeeId": 101,
+  "startDate": "2025-07-10",
+  "endDate": "2025-07-14",
+  "reason": "Vacation"
+}
+
+Response:
+{
+  "message": "Spot released successfully",
+  "statusCode": 200,
+  "data": {
+    "spotNumber": "A101",
+    "status": "RELEASED",
+    "fromDate": "2025-07-10",
+    "toDate": "2025-07-14"
+  }
+}
+ Error Responses:
+Spot not found
+
+Not owner of the spot
+
+Invalid dates
+
+
+
+2) Raise Booking Request (1-Day Only)
+➤ URL: POST /api/spot/booking
+➤ Action: Request to book a parking spot
+🔸 Request Payload:
+{
+  "employeeId": 101,
+  "spotNumber": "A101",
+  "startDate": "2025-07-10",
+  "endDate": "2025-07-10"
+}
+ Response:
+{
+  "message": "Booking request raised successfully",
+  "statusCode": 200,
+  "data": {
+    "spotNumber": "A101",
+    "employeeId": 101,
+    "status": "PENDING",
+    "startDate": "2025-07-10",
+    "endDate": "2025-07-10"
+  }
+}
+Error Responses:
+Spot already booked on this date
+
+Invalid employee ID 
+ 
+ 
+3) Auto Allocate Booking Requests
+➤ URL: PUT /api/spots/bookings/auto-allocate
+➤ Action: Process pending booking requests via scheduler or manual API call
+🔸 Request Payload:
+No payload required (empty PUT request)
+
+✅ Successful Response:
+{
+  "message": "Booking requests processed",
+  "statusCode": 200,
+  "data": {
+    "approved": 3,
+    "rejected": 2
+  }
+}
+Response:
+{
+  "message": "Booking requests processed",
+  "statusCode": 200,
+  "data": {
+    "approved": 3,
+    "rejected": 2
+  }
+}
+Error Responses:
+No available spots
+
+Mismatch in release dates or spot not found
+
+
+____________________________________________________________________  
+  
+
+localhost:8080/api/employees
+{
+  "name": "abc",
+  "email": "abc@example.com",
+  "phoneNumber": "7834567890",
+  "department": "IT",
+  "designation": "Developer"
+}
+Response:
+{
+    "id": 3,
+    "name": "abc",
+    "email": "abc@example.com",
+    "phoneNumber": "7834567890",
+    "department": "IT",
+    "designation": "Developer",
+    "parkingSpot": null
+}
+ 
+ 
+ 
+localhost:8080/api/spots
+{
+  "spotNumber": "A101",
+  "isAvailable": true,
+  "employeeId": 1
+}
+Response:
+{
+    "id": 1,
+    "spotNumber": "A101",
+    "isAvailable": true,
+    "releaseStartDate": "2025-07-03",
+    "releaseEndDate": "2025-07-04",
+    "releaseReason": "Initial allocation",
+    "employee": {
+        "id": 1,
+        "name": "xyz",
+        "email": "xyz@gmail.com",
+        "phoneNumber": null,
+        "department": null,
+        "designation": null,
+        "parkingSpot": null
+    }
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
