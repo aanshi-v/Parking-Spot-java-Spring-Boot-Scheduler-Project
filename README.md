@@ -1,3 +1,5 @@
+# Parking Spot Management System
+
 This is a Parking Spot Management System built using Java, Spring Boot, MySQL, and REST APIs.
 It allows employees to release their parking spot, raise 1-day booking requests, and auto-approve/reject those bookings.
 ---
