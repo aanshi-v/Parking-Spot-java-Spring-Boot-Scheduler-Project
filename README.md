@@ -63,7 +63,6 @@ Global Exception Handling
 ---
 
 ### Example Flow
-I’ll now demonstrate:
 
 Creating an employee
 
